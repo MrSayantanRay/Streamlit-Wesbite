@@ -1,0 +1,10 @@
+# Ignore the local Python virtual environment
+.venv/
+
+# Ignore Python's background tracking caches
+__pycache__/
+*.pyc
+
+# Ignore OS-specific system junk files
+.DS_Store
+Thumbs.db
