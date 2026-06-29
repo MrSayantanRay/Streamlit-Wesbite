@@ -32,7 +32,7 @@ def main():
     main_menu_options = [
         "👤 Portfolio Landing Page",
         "📊 Interactive EDA Dashboard",
-        "🔮 Mental Health Predictor & Analyzer"
+        "🔮 Psychometric Predictor & Analyzer"
     ]
     
     selected_page = st.sidebar.radio("Navigation Menu", main_menu_options)
