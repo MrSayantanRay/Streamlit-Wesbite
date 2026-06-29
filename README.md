@@ -1,70 +1,125 @@
 # COVID-19 Mental Health Impact Analysis & DASS-21 Dashboard
 
-An interactive, production-grade analytics platform and professional portfolio built by **Sayantan Ray** (M.Sc. Mathematics & Computing, NIT Hamirpur). This project models the psychological impact of the COVID-19 pandemic on 978 respondents across six major Indian metro cities, tracking transition changes between Phase 1 (T1: early wave/lockdown) and Phase 2 (T2: subsequent wave/easing).
+An interactive analytics platform and professional portfolio built by **Sayantan Ray** (M.Sc. Mathematics & Computing, NIT Hamirpur). The app models the psychological impact of the COVID-19 pandemic on 978 respondents across six major Indian metro cities, tracking changes between Phase 1 (T1: early wave/lockdown) and Phase 2 (T2: subsequent wave/easing).
 
-📊 **Live Portfolio & Dashboard App**  
-Designed with a premium glassmorphic dark-theme UI, optimized caching, and mathematical statistical validation.
+Designed with a glassmorphic dark-theme UI, optimized caching, and statistical validation.
 
 ---
 
-## 🧠 DASS-21 Scientific Framework
+## DASS-21 Scientific Framework
 
 The project uses the **Depression, Anxiety, and Stress Scale (DASS-21)**:
-*   **Depression (7 items)**: Assesses dysphoria, hopelessness, and devaluation of life.
-*   **Anxiety (7 items)**: Assesses physiological arousal, situational anxiety, and subjective fear.
-*   **Stress (7 items)**: Assesses tension, irritability, and non-specific arousal.
+
+- **Depression (7 items)**: Dysphoria, hopelessness, and devaluation of life.
+- **Anxiety (7 items)**: Physiological arousal, situational anxiety, and subjective fear.
+- **Stress (7 items)**: Tension, irritability, and non-specific arousal.
 
 Scale scores are mapped to severity classifications (Normal, Mild, Moderate, Severe, Extremely Severe) using established psychological scoring rules.
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
-1.  **Portfolio Page**: Recruiter-friendly landing page with educational credentials (NIT Hamirpur), technical skill tags, and social profiles.
-2.  **Interactive EDA Dashboard**: Full exploratory analysis of demographics, temporal shifts in socioeconomic factors (monthly expenditures, education status, job status), and mental health impact.
-3.  **Dynamic Filtering**: Instantly slice the entire analysis by *Metro City, Gender, Age Group, and Education Level*.
-4.  **Statistical Rigor**:
-    *   **Spearman Rank Correlation Heatmap**: Demonstrates the interconnectedness of depression, anxiety, and stress across phases.
-    *   **Live Chi-Square Test of Independence**: Validates whether socioeconomic disruptors have a statistically significant relationship with psychological outcomes.
-
----
-
-## 🛠️ Installation & Local Usage
-
-1.  **Clone the Repository**:
-    ```bash
-    git clone https://github.com/MrSayantanRay/EDA-on-Mental-Health.git
-    cd EDA-on-Mental-Health
-    ```
-
-2.  **Install Dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3.  **Run the Streamlit Dashboard**:
-    ```bash
-    streamlit run app.py
-    ```
+1. **Portfolio Landing Page** — Recruiter-friendly profile with credentials, skill tags, social links, and an embedded contact section.
+2. **Interactive EDA Dashboard** — Exploratory analysis of demographics, socioeconomic shifts, and mental health impact across T1 and T2.
+3. **Statistical Insights** — Spearman rank correlation heatmaps and live Chi-Square tests of independence.
+4. **Mental Health Predictor & Analyzer** — Logistic regression pipelines trained on DASS-21 responses to classify depression, anxiety, and stress severity.
+5. **Dynamic Filtering** — Slice the dashboard by metro city, gender, age group, and education level.
 
 ---
 
-## 📂 Project Architecture
+## Tech Stack
+
+| Library | Version |
+|---------|---------|
+| Streamlit | 1.58.0 |
+| Pandas | 3.0.3 |
+| NumPy | 2.4.6 |
+| Plotly | 6.8.0 |
+| SciPy | 1.17.1 |
+| scikit-learn | 1.9.0 |
+| Requests | 2.34.2 |
+
+---
+
+## Installation & Local Usage
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/MrSayantanRay/EDA-on-Mental-Health.git
+   cd EDA-on-Mental-Health
+   ```
+
+2. **Create and activate a virtual environment** (recommended)
+
+   ```bash
+   python -m venv .venv
+
+   # Windows
+   .venv\Scripts\activate
+
+   # macOS / Linux
+   source .venv/bin/activate
+   ```
+
+3. **Install dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Add the dataset**
+
+   Place the cleaned CSV in the project root:
+
+   ```
+   03_adult mental health in indian metro cities 2001-2021 (cleaned).csv
+   ```
+
+5. **Run the app**
+
+   ```bash
+   streamlit run app.py
+   ```
+
+---
+
+## Project Structure
 
 ```
 ├── .streamlit/
-│   └── config.toml               # Streamlit theme configuration (Dark Mode first)
-├── app.py                         # Application router
+│   └── config.toml               # Dark theme configuration
+├── app.py                        # Entry point and sidebar navigation
 ├── utils/
-│   ├── data_loader.py            # Caching-enabled CSV reader and transformer
-│   └── theme.py                  # Custom glassmorphic CSS injectors
+│   ├── data_loader.py            # Cached CSV loader and transformations
+│   └── theme.py                  # Custom glassmorphic CSS
 ├── components/
-│   └── cards.py                  # Custom metric and info card components
+│   └── cards.py                  # Reusable metric and glass cards
 ├── modules/
-│   ├── portfolio.py              # Portfolio landing page
-│   ├── dashboard.py              # Core interactive EDA and impact analysis
-│   ├── statistical_insights.py   # Spearman correlation & Chi-Square testing
-│   └── contact.py                # Connect form and links
-├── requirements.txt               # Project dependencies
-└── README.md                      # Documentation
+│   ├── portfolio.py              # Landing page (includes contact section)
+│   ├── dashboard.py              # Interactive EDA and impact analysis
+│   ├── statistical_insights.py   # Spearman correlation and Chi-Square tests
+│   ├── predictor.py              # DASS-21 severity classifier
+│   └── contact.py                # Contact form and social links
+├── requirements.txt
+└── README.md
 ```
+
+---
+
+## Navigation
+
+| Sidebar page | Description |
+|---|---|
+| Portfolio Landing Page | Profile, skills, and contact |
+| Interactive EDA Dashboard | Main metrics view or Statistical Insights sub-view |
+| Mental Health Predictor & Analyzer | DASS-21 survey input and ML-based severity prediction |
+
+---
+
+## Author
+
+**Sayantan Ray** — M.Sc. Mathematics & Computing, NIT Hamirpur
+
+© 2026 All rights reserved.
