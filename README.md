@@ -1,4 +1,4 @@
-# 📋 Project Overview
+# Project Overview
 Built by **Sayantan Ray**
 
 ---
