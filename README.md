@@ -1,6 +1,11 @@
-# COVID-19 Mental Health Impact Analysis & DASS-21 Dashboard
+# 📋 Project Overview
+Built by **Sayantan Ray**
 
-An interactive analytics platform and professional portfolio built by **Sayantan Ray** (M.Sc. Mathematics & Computing, NIT Hamirpur). The app models the psychological impact of the COVID-19 pandemic on 978 respondents across six major Indian metro cities, tracking changes between Phase 1 (T1: early wave/lockdown) and Phase 2 (T2: subsequent wave/easing).
+---
+An advanced data analytics platform and professional portfolio that models and predicts the psychological impact of the COVID-19 pandemic across urban India. By blending deep statistical tracking with predictive machine learning, this application provides data-driven insights into human resilience and psychological vulnerability during a global crisis. The application tracks, visualizes, and predicts critical shifts in mental well-being across two pivotal timelines:
+* **Phase 1 (T1):** The initial wave and strict national lockdown constraints.
+* **Phase 2 (T2):** Subsequent pandemic waves alongside phased policy easing.
+
 
 Designed with a glassmorphic dark-theme UI, optimized caching, and statistical validation.
 
@@ -23,13 +28,18 @@ Scale scores are mapped to severity classifications (Normal, Mild, Moderate, Sev
 1. **Portfolio Landing Page** — Recruiter-friendly profile with credentials, skill tags, social links, and an embedded contact section.
 2. **Interactive EDA Dashboard** — Exploratory analysis of demographics, socioeconomic shifts, and mental health impact across T1 and T2.
 3. **Statistical Insights** — Spearman rank correlation heatmaps and live Chi-Square tests of independence.
-4. **Mental Health Predictor & Analyzer** — Logistic regression pipelines trained on DASS-21 responses to classify depression, anxiety, and stress severity.
-5. **Dynamic Filtering** — Slice the dashboard by metro city, gender, age group, and education level.
+4. **Mental Health Predictor & Analyzer** — **`Logistic regression`** pipelines trained on DASS-21 responses to classify depression, anxiety, and stress severity.
+5. **Transparent Model Performance** — Live evaluation metrics displaying the accuracy, precision, and overall correctness of the predictive models, proving the statistical validity of the backend system.
+6. **Dynamic Filtering** — Slice the dashboard by metro city, gender, age group, and education level.
+7. **Premium Glassmorphism UI** — A gorgeous, customized Streamlit interface using glass-morphic design principles to deliver an immersive user experience that stands out from standard templates.
 
 ---
 
 ## Tech Stack
-
+1. **Frontend Architecture** — Streamlit, Custom HTML5/CSS3 (Glassmorphism architecture)
+2. **API & Integrations** — Native JavaScript async fetching, EmailJS email integration
+3. **Data Science & ML Pipeline** — Python, Pandas, Scikit-Learn (or your specific ML package)
+ 
 | Library | Version |
 |---------|---------|
 | Streamlit | 1.58.0 |
