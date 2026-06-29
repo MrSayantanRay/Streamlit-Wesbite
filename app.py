@@ -72,7 +72,7 @@ def main():
         else:
             render_dashboard_page(df)
             
-    elif selected_page == "🔮 Mental Health Predictor & Analyzer":
+    elif selected_page == "🔮 Psychometric Predictor & Analyzer":
         render_predictor_page()
 
 if __name__ == "__main__":
