@@ -6,21 +6,47 @@ from modules.dashboard import render_dashboard_page
 from modules.statistical_insights import render_statistical_page
 from modules.predictor import render_predictor_page
 
-# The ultimate cleanup block (hides menus, headers, footers, and the floating viewer badge)
+# --------------------------------------------------
+# 1. INITIALIZE PAGE CONFIG (MUST BE ABSOLUTE FIRST)
+# --------------------------------------------------
+st.set_page_config(
+    page_title="Sayantan Ray - Mental Health Analysis Portfolio",
+    page_icon="icon design.png",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# --------------------------------------------------
+# 2. INJECT CLEANUP CSS (NOW RECOGNIZED PROPERLY)
+# --------------------------------------------------
 custom_style = """
             <style>
-            /* 1. Clear out default menu, header, and footer */
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            header {visibility: hidden;}
-            .stDeployButton {display: none;}
+            /* Completely erase top header and avatar frame */
+            header, [data-testid="stHeader"] {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0px !important;
+            }
             
-            /* 2. 🚫 VAPORIZE THE "HOSTED WITH STREAMLIT" BADGE */
-            .viewerBadge {display: none !important;}
-            [data-testid="stViewerBadge"] {display: none !important;}
-            div[data-testid="stStatusWidget"] {display: none !important;}
+            /* Completely erase hamburger menu and deploy buttons */
+            #MainMenu, [data-testid="stMainMenu"], .stDeployButton {
+                display: none !important;
+                visibility: hidden !important;
+            }
             
-            /* 3. Mobile adjustments */
+            /* Completely erase standard footer */
+            footer, [data-testid="stFooter"] {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            
+            /* 🚫 OBLITERATE THE "HOSTED WITH STREAMLIT" FLOATING BADGE */
+            .viewerBadge, [data-testid="stViewerBadge"], div[data-testid="stStatusWidget"] {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            
+            /* Mobile adjustments */
             @media (max-width: 768px) {
                 .glass-card {
                     padding: 15px;
@@ -34,16 +60,9 @@ custom_style = """
             """
 st.markdown(custom_style, unsafe_allow_html=True)
 
+
 def main():
-    # Set page configuration
-    st.set_page_config(
-        page_title="Sayantan Ray - Mental Health Analysis Portfolio",
-        page_icon="icon design.png",
-        layout="wide",
-        initial_sidebar_state="expanded"
-    )
-    
-    # Inject premium custom CSS styles
+    # Inject premium custom CSS styles from your theme module
     inject_custom_css()
     
     # Load and cache survey dataset
@@ -104,5 +123,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
