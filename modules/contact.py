@@ -138,113 +138,101 @@ def render_contact_page():
         """
         draw_glass_card("", details_html)
 
-    # --- COLUMN 2: MESSAGE FORM ---
     with col2:
-        # 1. Title wrapper using identical layout footprint to match Column 1 perfectly
         st.markdown(
             """
             <div style="height: 60px; margin-bottom: 1.5rem; display: flex; flex-direction: column; justify-content: flex-end;">
                 <h3 style="color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 1.25rem; font-weight: 600; margin: 0; padding-bottom: 2px;">
-                    Send a Message
+                    Contact Form
                 </h3>
             </div>
             """, 
             unsafe_allow_html=True
         )
-        
-        # 2. Form element configured to exactly 356px
-        form_html = """
-        <form id="native-glass-form" style="
-            height: 356px; 
-            display: flex; 
-            flex-direction: column; 
-            margin: 0; 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            color: #E2E8F0; 
-            box-sizing: border-box;
-        ">
-            
-            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; flex-shrink: 0;">
-                <label style="font-size: 0.85rem; color: #94A3B8; font-weight: 500;">Name</label>
-                <input type="text" id="user_name" placeholder="Your Name" required 
-                    style="background: rgba(15, 17, 26, 0.5); border: 1px solid rgba(108, 92, 231, 0.2); color: #FFF; padding: 10px 14px; border-radius: 8px; outline: none; font-size: 0.95rem; transition: border-color 0.2s;">
-            </div>
 
-            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; flex-shrink: 0;">
-                <label style="font-size: 0.85rem; color: #94A3B8; font-weight: 500;">Email</label>
-                <input type="email" id="user_email" placeholder="Your Email Address" required 
-                    style="background: rgba(15, 17, 26, 0.5); border: 1px solid rgba(108, 92, 231, 0.2); color: #FFF; padding: 10px 14px; border-radius: 8px; outline: none; font-size: 0.95rem; transition: border-color 0.2s;">
-            </div>
+        # Contact Form
+        with st.form(
+            key="contact_form",
+            clear_on_submit=True
+        ):
 
-            <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; margin-bottom: 12px; min-height: 80px;">
-                <label style="font-size: 0.85rem; color: #94A3B8; font-weight: 500;">Message</label>
-                <textarea id="user_message" placeholder="Write your message here..." required 
-                    style="background: rgba(15, 17, 26, 0.5); border: 1px solid rgba(108, 92, 231, 0.2); color: #FFF; padding: 10px 14px; border-radius: 8px; outline: none; font-size: 0.95rem; flex: 1; resize: none; font-family: inherit; transition: border-color 0.2s; box-sizing: border-box;"></textarea>
-            </div>
+            user_name = st.text_input(
+                "Name",
+                placeholder="Your Name"
+            )
 
-            <button type="submit" id="submit-button" 
-                style="background: rgba(108, 92, 231, 0.15); border: 1px solid rgba(108, 92, 231, 0.4); color: #A8A5FF; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s; flex-shrink: 0;">
-                Send Message
-            </button>
-            
-            <div id="response-status" style="font-size: 0.85rem; text-align: center; font-weight: 500; margin-top: 4px; min-height: 18px; flex-shrink: 0;"></div>
-        </form>
+            user_email = st.text_input(
+                "Email",
+                placeholder="Your Email Address"
+            )
 
-        <script>
-            const inputs = document.querySelectorAll('input, textarea');
-            inputs.forEach(el => {
-                el.addEventListener('focus', () => el.style.borderColor = 'rgba(108, 92, 231, 0.6)');
-                el.addEventListener('blur', () => el.style.borderColor = 'rgba(108, 92, 231, 0.2)');
-            });
+            user_message = st.text_area(
+                "Message",
+                placeholder="Write your message here...",
+                height=150
+            )
 
-            document.getElementById('native-glass-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                const btn = document.getElementById('submit-button');
-                const statusDiv = document.getElementById('response-status');
-                
-                btn.innerText = 'Sending...';
-                btn.style.opacity = '0.7';
-                btn.disabled = true;
-                statusDiv.innerText = '';
+            submit = st.form_submit_button(
+                "Send Message"
+            )
 
-                const payload = {
-                    "service_id": "service_y09zera",
-                    "template_id": "template_mm68z4h",
-                    "user_id": "jtmhRRh781MPPn1IR",
-                    "accessToken": "YAwCgAkV6BgJ1JEKbomFU",
-                    "template_params": {
-                        "from_name": document.getElementById('user_name').value,
-                        "from_email": document.getElementById('user_email').value,
-                        "message": document.getElementById('user_message').value
+            # Submit Logic
+            if submit:
+
+                # Validation
+                if (
+                    not user_name.strip()
+                    or not user_email.strip()
+                    or not user_message.strip()
+                ):
+                    st.error(
+                        "Please fill out all fields."
+                    )
+
+                elif (
+                    "@"
+                    not in user_email
+                    or "."
+                    not in user_email
+                ):
+                    st.error(
+                        "Please enter a valid email address.")
+
+                else:
+                    payload = {
+                        "service_id": "service_y09zera",
+                        "template_id": "template_mm68z4h",
+
+                        "user_id": "12PEnlt7a5g841n0Y",
+
+                        "accessToken": st.secrets["EMAILJS_PRIVATE_KEY"],
+
+                        "template_params": {
+                            "from_name": user_name,
+                            "from_email": user_email,
+                            "message": user_message
+                        }
                     }
-                };
 
-                fetch('https://api.emailjs.com/api/v1.0/email/send', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                })
-                .then(res => {
-                    if (res.status === 200) {
-                        statusDiv.style.color = '#4ADE80';
-                        statusDiv.innerText = 'Thank you! Your message has been sent successfully.';
-                        document.getElementById('native-glass-form').reset();
-                    } else {
-                        return res.text().then(text => { throw new Error(text) });
-                    }
-                })
-                .catch(err => {
-                    statusDiv.style.color = '#F87171';
-                    statusDiv.innerText = 'Failed to send message. Please try again.';
-                    console.error(err);
-                })
-                .finally(() => {
-                    btn.innerText = 'Send Message';
-                    btn.style.opacity = '1';
-                    btn.disabled = false;
-                });
-            });
-        </script>
-        """
-        draw_glass_card("", form_html)
+                    try:
+                        with st.spinner("Sending message..."):
+                            response = requests.post(
+                                "https://api.emailjs.com/api/v1.0/email/send",
+                                json=payload,
+                                headers={"Content-Type":"application/json"},
+                                timeout=10)
+
+                        if response.ok:
+                            st.success(
+                                "Thank you! Your message has been sent successfully.")
+
+                        else:
+                            st.error(f"Email sending failed (Status {response.status_code})")
+                            st.error(response.text)
+
+                    except requests.Timeout:
+                        st.error("Request timed out. Please try again.")
+
+                    except Exception as e:
+                        st.error("Unexpected error occurred.")
+                        st.exception(e)
