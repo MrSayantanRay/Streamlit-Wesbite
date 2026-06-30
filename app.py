@@ -78,4 +78,16 @@ def main():
 if __name__ == "__main__":
     main()
 
-# # streamlit run app.py
+import streamlit as st
+
+# Clean up default Streamlit platform branding and headers
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            .stDeployButton {display: none;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
