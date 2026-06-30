@@ -6,47 +6,54 @@ from modules.dashboard import render_dashboard_page
 from modules.statistical_insights import render_statistical_page
 from modules.predictor import render_predictor_page
 
-# --------------------------------------------------
-# 1. INITIALIZE PAGE CONFIG (MUST BE ABSOLUTE FIRST)
-# --------------------------------------------------
-st.set_page_config(
-    page_title="Sayantan Ray - Mental Health Analysis Portfolio",
-    page_icon="icon design.png",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-# --------------------------------------------------
-# 2. INJECT CLEANUP CSS (NOW RECOGNIZED PROPERLY)
-# --------------------------------------------------
-custom_style = """
+def main():
+    # 1. Set page configuration (Must stay first)
+    st.set_page_config(
+        page_title="Sayantan Ray - Mental Health Analysis Portfolio",
+        page_icon="icon design.png",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
+    
+    # 2. Inject your portfolio's theme
+    inject_custom_css()
+    
+    # 3. 🛡️ THE UNSTOPPABLE CLEANUP BLOCK (Placed here to override everything else)
+    unbreakable_clean_style = """
             <style>
-            /* Completely erase top header and avatar frame */
-            header, [data-testid="stHeader"] {
+            /* Hide the modern header and avatar container completely */
+            header, [data-testid="stHeader"], .stHeader {
                 display: none !important;
                 visibility: hidden !important;
                 height: 0px !important;
             }
             
-            /* Completely erase hamburger menu and deploy buttons */
-            #MainMenu, [data-testid="stMainMenu"], .stDeployButton {
+            /* Target Streamlit's brand new deploy button class */
+            .stAppDeployButton, .stDeployButton {
                 display: none !important;
                 visibility: hidden !important;
             }
             
-            /* Completely erase standard footer */
+            /* Hide the main menu container */
+            #MainMenu, [data-testid="stMainMenu"] {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            
+            /* Hide the default footer */
             footer, [data-testid="stFooter"] {
                 display: none !important;
                 visibility: hidden !important;
             }
             
-            /* 🚫 OBLITERATE THE "HOSTED WITH STREAMLIT" FLOATING BADGE */
-            .viewerBadge, [data-testid="stViewerBadge"], div[data-testid="stStatusWidget"] {
+            /* Target all known iterations of the floating "Hosted with Streamlit" badge */
+            .viewerBadge, .stViewerBadge, [data-testid="stViewerBadge"], div[data-testid="stStatusWidget"] {
                 display: none !important;
                 visibility: hidden !important;
+                opacity: 0 !important;
             }
             
-            /* Mobile adjustments */
+            /* Mobile tweaks */
             @media (max-width: 768px) {
                 .glass-card {
                     padding: 15px;
@@ -58,12 +65,7 @@ custom_style = """
             }
             </style>
             """
-st.markdown(custom_style, unsafe_allow_html=True)
-
-
-def main():
-    # Inject premium custom CSS styles from your theme module
-    inject_custom_css()
+    st.markdown(unbreakable_clean_style, unsafe_allow_html=True)
     
     # Load and cache survey dataset
     try:
