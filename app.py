@@ -6,31 +6,28 @@ from modules.dashboard import render_dashboard_page
 from modules.statistical_insights import render_statistical_page
 from modules.predictor import render_predictor_page
 
+# The ultimate cleanup block (hides menus, headers, footers, and the floating viewer badge)
 custom_style = """
             <style>
-            /* 1. Clear out default cloud branding */
+            /* 1. Clear out default menu, header, and footer */
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
             .stDeployButton {display: none;}
             
-            /* 2. Desktop/Default Glassmorphism Card Style */
-            .glass-card {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
-                border-radius: 15px;
-                padding: 25px;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            /* 3. 📱 MOBILE-SPECIFIC FIXES (Triggers on screens smaller than 768px) */
+            /* 2. 🚫 VAPORIZE THE "HOSTED WITH STREAMLIT" BADGE */
+            .viewerBadge {display: none !important;}
+            [data-testid="stViewerBadge"] {display: none !important;}
+            div[data-testid="stStatusWidget"] {display: none !important;}
+            
+            /* 3. Mobile adjustments */
             @media (max-width: 768px) {
                 .glass-card {
-                    padding: 15px;          /* Shrink internal spacing so it fits neatly */
-                    font-size: 14px;        /* Slightly scale down fonts */
+                    padding: 15px;
+                    font-size: 14px;
                 }
                 h1 {
-                    font-size: 24px !important; /* Prevent titles from overlapping or breaking weirdly */
+                    font-size: 24px !important;
                 }
             }
             </style>
