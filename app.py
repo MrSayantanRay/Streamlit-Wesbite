@@ -6,6 +6,36 @@ from modules.dashboard import render_dashboard_page
 from modules.statistical_insights import render_statistical_page
 from modules.predictor import render_predictor_page
 
+custom_style = """
+            <style>
+            /* 1. Clear out default cloud branding */
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            .stDeployButton {display: none;}
+            
+            /* 2. Desktop/Default Glassmorphism Card Style */
+            .glass-card {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                border-radius: 15px;
+                padding: 25px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            /* 3. 📱 MOBILE-SPECIFIC FIXES (Triggers on screens smaller than 768px) */
+            @media (max-width: 768px) {
+                .glass-card {
+                    padding: 15px;          /* Shrink internal spacing so it fits neatly */
+                    font-size: 14px;        /* Slightly scale down fonts */
+                }
+                h1 {
+                    font-size: 24px !important; /* Prevent titles from overlapping or breaking weirdly */
+                }
+            }
+            </style>
+            """
+st.markdown(custom_style, unsafe_allow_html=True)
 
 def main():
     # Set page configuration
@@ -78,16 +108,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-import streamlit as st
-
-# Clean up default Streamlit platform branding and headers
-hide_st_style = """
-            <style>
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            header {visibility: hidden;}
-            .stDeployButton {display: none;}
-            </style>
-            """
-st.markdown(hide_st_style, unsafe_allow_html=True)
 
