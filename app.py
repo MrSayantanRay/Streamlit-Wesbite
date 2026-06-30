@@ -20,51 +20,50 @@ def main():
     
     # 3. 🛡️ THE UNSTOPPABLE CLEANUP BLOCK (Placed here to override everything else)
     unbreakable_clean_style = """
-            <style>
-            /* Hide the modern header and avatar container completely */
-            header, [data-testid="stHeader"], .stHeader {
-                display: none !important;
-                visibility: hidden !important;
-                height: 0px !important;
-            }
-            
-            /* Target Streamlit's brand new deploy button class */
-            .stAppDeployButton, .stDeployButton {
-                display: none !important;
-                visibility: hidden !important;
-            }
-            
-            /* Hide the main menu container */
-            #MainMenu, [data-testid="stMainMenu"] {
-                display: none !important;
-                visibility: hidden !important;
-            }
-            
-            /* Hide the default footer */
-            footer, [data-testid="stFooter"] {
-                display: none !important;
-                visibility: hidden !important;
-            }
-            
-            /* Target all known iterations of the floating "Hosted with Streamlit" badge */
-            .viewerBadge, .stViewerBadge, [data-testid="stViewerBadge"], div[data-testid="stStatusWidget"] {
-                display: none !important;
-                visibility: hidden !important;
-                opacity: 0 !important;
-            }
-            
-            /* Mobile tweaks */
-            @media (max-width: 768px) {
-                .glass-card {
-                    padding: 15px;
-                    font-size: 14px;
-                }
-                h1 {
-                    font-size: 24px !important;
-                }
-            }
-            </style>
-            """
+    <style>
+
+    /* Keep Streamlit header alive so sidebar can reopen */
+    header,
+    [data-testid="stHeader"]{
+        background: transparent !important;
+    }
+
+    /* Hide deploy button */
+    .stAppDeployButton,
+    .stDeployButton{
+        display:none !important;
+    }
+
+    /* Hide footer */
+    footer,
+    [data-testid="stFooter"]{
+        display:none !important;
+    }
+
+    /* Hide Streamlit badge */
+    .viewerBadge,
+    .stViewerBadge,
+    [data-testid="stViewerBadge"],
+    div[data-testid="stStatusWidget"]{
+        display:none !important;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width:768px){
+
+    .glass-card{
+    padding:15px;
+    font-size:14px;
+    }
+
+    h1{
+    font-size:24px !important;
+    }
+
+    }
+
+    </style>
+    """
     st.markdown(unbreakable_clean_style, unsafe_allow_html=True)
     
     # Load and cache survey dataset
