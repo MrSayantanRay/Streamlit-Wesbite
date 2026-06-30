@@ -6,9 +6,8 @@ from modules.dashboard import render_dashboard_page
 from modules.statistical_insights import render_statistical_page
 from modules.predictor import render_predictor_page
 
-
 def main():
-    # Set page configuration
+    # 1. Set page configuration (Must stay first)
     st.set_page_config(
         page_title="Sayantan Ray - Mental Health Analysis Portfolio",
         page_icon="icon design.png",
@@ -16,8 +15,57 @@ def main():
         initial_sidebar_state="expanded"
     )
     
-    # Inject premium custom CSS styles
+    # 2. Inject your portfolio's theme
     inject_custom_css()
+    
+    # 3. 🛡️ THE UNSTOPPABLE CLEANUP BLOCK (Placed here to override everything else)
+    unbreakable_clean_style = """
+            <style>
+            /* Hide the modern header and avatar container completely */
+            header, [data-testid="stHeader"], .stHeader {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0px !important;
+            }
+            
+            /* Target Streamlit's brand new deploy button class */
+            .stAppDeployButton, .stDeployButton {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            
+            /* Hide the main menu container */
+            #MainMenu, [data-testid="stMainMenu"] {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            
+            /* Hide the default footer */
+            footer, [data-testid="stFooter"] {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            
+            /* Target all known iterations of the floating "Hosted with Streamlit" badge */
+            .viewerBadge, .stViewerBadge, [data-testid="stViewerBadge"], div[data-testid="stStatusWidget"] {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+            }
+            
+            /* Mobile tweaks */
+            @media (max-width: 768px) {
+                .glass-card {
+                    padding: 15px;
+                    font-size: 14px;
+                }
+                h1 {
+                    font-size: 24px !important;
+                }
+            }
+            </style>
+            """
+    st.markdown(unbreakable_clean_style, unsafe_allow_html=True)
     
     # Load and cache survey dataset
     try:
@@ -32,7 +80,7 @@ def main():
     main_menu_options = [
         "👤 Portfolio Landing Page",
         "📊 Interactive EDA Dashboard",
-        "🔮 Mental Health Predictor & Analyzer"
+        "🔮 Psychometric Predictor & Analyzer"
     ]
     
     selected_page = st.sidebar.radio("Navigation Menu", main_menu_options)
@@ -72,10 +120,8 @@ def main():
         else:
             render_dashboard_page(df)
             
-    elif selected_page == "🔮 Mental Health Predictor & Analyzer":
+    elif selected_page == "🔮 Psychometric Predictor & Analyzer":
         render_predictor_page()
 
 if __name__ == "__main__":
     main()
-
-# # streamlit run app.py
